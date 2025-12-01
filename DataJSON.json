@@ -1,0 +1,16 @@
+[
+  {
+    "email": "test@gmail.com",
+    "name": "testAccountPostman",
+    "password": "testAcccountPOSTman235",
+    "role": "admin",
+    "avatar": "https://i.imgur.com/LDOO4Qs.jpg"
+  },
+  {
+    "email": "test33333@gmail.com",
+    "name": "testAccount2222Postman",
+    "password": "test22AcccountPOSTman233335",
+    "role": "customer",
+    "avatar": "https://i.imgur.com/LDOO4Qs.jpg"
+  }
+]

@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "37a27140-c7f3-4ec4-ade7-46c9b4960786",
+		"name": "DataDriven",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50394835",
+		"_collection_link": "https://ritesh-singh-6e6a348d-336735.postman.co/workspace/R's-Workspace~c2663409-1009-495f-81b4-a91c91173710/collection/50394835-37a27140-c7f3-4ec4-ade7-46c9b4960786?action=share&source=collection_link&creator=50394835"
+	},
+	"item": [
+		{
+			"name": "DataDriven",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let expectedStatus = pm.iterationData.get(\"expectedStatus\")\r",
+							"let userEmail = pm.iterationData.get(\"email\")\r",
+							"let userName = pm.iterationData.get(\"name\")\r",
+							"let userPassword = pm.iterationData.get(\"password\")\r",
+							"let userRole = pm.iterationData.get(\"role\")\r",
+							"let userAvatar = pm.iterationData.get(\"avatar\")\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"User body is correct\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(userEmail);\r",
+							"    pm.expect(jsonData.name).to.eql(userName);\r",
+							"    pm.expect(jsonData.password).to.eql(userPassword);\r",
+							"    pm.expect(jsonData.role).to.eql(userRole);\r",
+							"    pm.expect(jsonData.avatar).to.eql(userAvatar);\r",
+							"});\r",
+							"\r",
+							"let schema={\r",
+							"    \"type\": \"object\",\r",
+							"    \"required\": [\"id\", \"email\", \"name\", \"password\", \"role\", \"avatar\"],\r",
+							"    \"properties\": {\r",
+							"        \"id\": { \"type\": \"number\" },\r",
+							"        \"email\": { \"type\": \"string\" },\r",
+							"        \"name\": { \"type\": \"string\" },\r",
+							"        \"password\": { \"type\": \"string\" },\r",
+							"        \"role\": { \"type\": \"string\" },\r",
+							"        \"avatar\": { \"type\": \"string\" }\r",
+							"    }\r",
+							"\r",
+							"}\r",
+							"pm.test(\"response body adhere to required contract schema\", ()=>{\r",
+							"    pm.response.to.have.jsonSchema(schema)\r",
+							"})\r",
+							"\r",
+							"pm.environment.set(\"UserNumber\", pm.response.json().id)"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"name\": \"{{name}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"role\": \"{{role}}\",\r\n  \"avatar\": \"{{avatar}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/users",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/v1/users/{{UserNumber}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{UserNumber}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

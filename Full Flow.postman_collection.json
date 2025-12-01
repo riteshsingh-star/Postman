@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "f20e3bfa-30d7-4c36-b6f5-fa5c7a5e2850",
+		"name": "Full Flow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50394835",
+		"_collection_link": "https://ritesh-singh-6e6a348d-336735.postman.co/workspace/c2663409-1009-495f-81b4-a91c91173710/collection/50394835-f20e3bfa-30d7-4c36-b6f5-fa5c7a5e2850?action=share&source=collection_link&creator=50394835"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"let userId = pm.response.json().id;\r",
+							"pm.environment.set(\"UserNumber\", userId);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{Email}}\",\r\n  \"name\": \"{{Name}}\",\r\n  \"password\": \"{{Password}}\",\r\n  \"role\": \"{{Role}}\",\r\n  \"avatar\": \"{{Avatar}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/users",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETUSERS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let avatar = pm.response.json().avatar;\r",
+							"pm.environment.set(\"Avatar\", avatar);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/v1/users/{{UserNumber}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{UserNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT USers",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{UpdateEmail}}\",\r\n  \"name\": \"{{UpdateName}}\",\r\n  \"password\": \"{{UpdatePassword}}\",\r\n  \"role\": \"{{UpdateRole}}\",\r\n  \"avatar\": \"{{Avatar}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/users/{{UserNumber}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{UserNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/v1/users/{{UserNumber}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{UserNumber}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

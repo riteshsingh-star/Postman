@@ -1,0 +1,3 @@
+email,name,password,role,avtar
+test@gmail.com,testAccountPostman,testAcccountPOSTman235,admin,https://i.imgur.com/LDOO4Qs.jpg
+test33333@gmail.com,testAccount2222Postman,test22AcccountPOSTman233335,customer,https://i.imgur.com/LDOO4Qs.jpg
