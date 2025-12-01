@@ -28,7 +28,7 @@ jobs:
       # 4️⃣ Run Postman collection
       - name: Run Postman Collection
         run: |
-          newman run Full Flow.postman_collection.json -e DataJSON.json r cli,html
+          newman run FullFlow.postman_collection.json -e DataJSON.json r cli,html
 
       # 5️⃣ Upload HTML report as artifact
       - name: Upload HTML Report
