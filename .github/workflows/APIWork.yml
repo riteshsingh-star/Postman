@@ -1,0 +1,38 @@
+name: Run Postman Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repository
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3️⃣ Install Newman and HTML reporter
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-html
+
+      # 4️⃣ Run Postman collection
+      - name: Run Postman Collection
+        run: |
+          newman run Full Flow.postman_collection.json -e DataJSON.json r cli,html
+
+      # 5️⃣ Upload HTML report as artifact
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: newman-report
+          path: newman_report.html
